@@ -1,1 +1,47 @@
+import java.util.*;
 
+class TestClass {
+    public static void main(String args[]) throws Exception {
+        // Create a Scanner object to read input from the console
+        Scanner sc = new Scanner(System.in);
+
+        // Read the number of songs in Bob's playlist
+        int n = sc.nextInt();
+
+        // Create an array to store the singer of each song
+        int singers[] = new int[n];
+
+        // Read the singer of each song and store it in the array
+        for (int i = 0; i < n; i++) {
+            singers[i] = sc.nextInt();
+        }
+
+        // Create a HashMap to store the count of each singer
+        Map<Integer, Integer> singerCount = new HashMap<>();
+
+        // Count the occurrences of each singer in the playlist
+        for (int singer : singers) {
+            singerCount.put(singer, singerCount.getOrDefault(singer, 0) + 1);
+        }
+
+        // Find the maximum occurrence among all singers
+        int max = 0;
+        for (int count : singerCount.values()) {
+            max = Math.max(max, count);
+        }
+
+        // Count the number of favorite singers with the maximum occurrence
+        int favSingerCount = 0;
+        for (int count : singerCount.values()) {
+            if (count == max) {
+                favSingerCount++;
+            }
+        }
+
+        // Print the result (number of favorite singers)
+        System.out.println(favSingerCount);
+
+        // Close the scanner to avoid resource leaks
+        sc.close();
+    }
+}
